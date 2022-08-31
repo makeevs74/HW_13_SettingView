@@ -69,6 +69,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         cell?.accessoryType = .disclosureIndicator
         return cell ?? UITableViewCell()
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        print("Tap on row №\(indexPath.row)")
+    }
 }
 
 extension ViewController: UISearchResultsUpdating {
