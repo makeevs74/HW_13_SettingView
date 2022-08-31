@@ -31,6 +31,10 @@ class ViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         setupHierarchy()
         setupLayout()
+
+        let searchBar = UISearchController(searchResultsController: nil)
+        searchBar.searchResultsUpdater = self
+        self.navigationItem.searchController = searchBar
     }
 
     // MARK: - Setup -
@@ -66,4 +70,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return cell ?? UITableViewCell()
     }
 }
+
+extension ViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        print(searchController.searchBar.text ?? "")
+    }
+}
+
 
