@@ -10,6 +10,13 @@ import SnapKit
 
 class CustomCellSettings: UITableViewCell {
 
+    var settingRow: SettingRow? {
+        didSet {
+            photoIcon.image = settingRow?.photoIcon
+            nameOfSetting.text = settingRow?.nameOfSetting
+        }
+    }
+
     // MARK: - Outlets -
 
     private lazy var photoIcon: UIImageView = {
@@ -58,5 +65,12 @@ class CustomCellSettings: UITableViewCell {
         }
     }
 
+    // MARK: - Reuse -
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.accessoryType = .none
+        self.settingRow = nil
+    }
 }
 

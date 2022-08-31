@@ -14,7 +14,8 @@ class ViewController: UIViewController {
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.register(CustomCellUser.self, forCellReuseIdentifier: "cell")
+        tableView.register(CustomCellUser.self, forCellReuseIdentifier: "cellOfUser")
+        tableView.register(CustomCellSettings.self, forCellReuseIdentifier: "cellOfSettings")
         tableView.dataSource = self
         tableView.delegate = self
         return tableView
@@ -53,26 +54,45 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        3
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        80
+        if indexPath.section == 0 && indexPath.row == 0 {
+            return 80
+        } else {
+            return 40
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 6
+        case 2:
+            return 4
+        default:
+            return 0
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? CustomCellUser
-        cell?.accessoryType = .disclosureIndicator
-        return cell ?? UITableViewCell()
+        var cell = UITableViewCell()
+        if indexPath.section == 0 {
+            cell = (tableView.dequeueReusableCell(withIdentifier: "cellOfUser") as? CustomCellUser)!
+            cell.accessoryType = .disclosureIndicator
+        } else {
+            cell = (tableView.dequeueReusableCell(withIdentifier: "cellOfSettings") as? CustomCellSettings)!
+            cell.accessoryType = .disclosureIndicator
+        }
+        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        print("Tap on row №\(indexPath.row)")
+        print("Tap on row №\(indexPath.row) in \(indexPath.section) section")
     }
 }
 
