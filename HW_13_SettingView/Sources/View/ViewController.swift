@@ -10,12 +10,15 @@ import SnapKit
 
 class ViewController: UIViewController {
 
+    private var settingRows: [[SettingRow]]?
+
     // MARK: - Outlets -
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.register(CustomCellUser.self, forCellReuseIdentifier: "cellOfUser")
-        tableView.register(CustomCellSettings.self, forCellReuseIdentifier: "cellOfSettings")
+        tableView.register(CustomCellUser.self, forCellReuseIdentifier: CustomCellUser.identifier)
+        tableView.register(CustomCellSettings.self, forCellReuseIdentifier: CustomCellSettings.identifier)
+        tableView.register(CustomCellWithSwitch.self, forCellReuseIdentifier: CustomCellWithSwitch.identifier)
         tableView.dataSource = self
         tableView.delegate = self
         return tableView
@@ -29,6 +32,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
         title = "Настройки"
+        settingRows = SettingRow.settingRows
         navigationController?.navigationBar.prefersLargeTitles = true
         setupHierarchy()
         setupLayout()
@@ -54,7 +58,7 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        3
+        return settingRows?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -66,33 +70,40 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 1
-        case 1:
-            return 6
-        case 2:
-            return 4
-        default:
-            return 0
-        }
+            return settingRows?[section].count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = UITableViewCell()
-        if indexPath.section == 0 {
-            cell = (tableView.dequeueReusableCell(withIdentifier: "cellOfUser") as? CustomCellUser)!
-            cell.accessoryType = .disclosureIndicator
-        } else {
-            cell = (tableView.dequeueReusableCell(withIdentifier: "cellOfSettings") as? CustomCellSettings)!
-            cell.accessoryType = .disclosureIndicator
+        let customCells = settingRows?[indexPath.section][indexPath.row]
+
+        switch customCells?.typeOfCell {
+        case .userCell:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CustomCellUser.identifier) as? CustomCellUser
+            cell?.settingRow = settingRows?[indexPath.section][indexPath.row]
+            cell?.accessoryType = .disclosureIndicator
+            return cell ?? UITableViewCell()
+
+        case .settingCell:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CustomCellSettings.identifier) as? CustomCellSettings
+            cell?.settingRow = settingRows?[indexPath.section][indexPath.row]
+            cell?.accessoryType = .disclosureIndicator
+            return cell ?? UITableViewCell()
+            
+        case .settingCellWithSwitch:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CustomCellWithSwitch.identifier) as? CustomCellWithSwitch
+            cell?.settingRow = settingRows?[indexPath.section][indexPath.row]
+            cell?.accessoryType = .none
+            return cell ?? UITableViewCell()
+
+        case .none:
+            return UITableViewCell()
         }
-        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        print("Tap on row №\(indexPath.row) in \(indexPath.section) section")
+        let cell = settingRows?[indexPath.section][indexPath.row]
+        print("Вы нажали \(cell?.nameOfSetting ?? "")")
     }
 }
 

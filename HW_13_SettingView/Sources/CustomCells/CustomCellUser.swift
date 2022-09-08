@@ -10,27 +10,34 @@ import SnapKit
 
 class CustomCellUser: UITableViewCell {
 
+    static let identifier = "cellOfUser"
+
+    var settingRow: SettingRow? {
+        didSet {
+            photoImage.image = settingRow?.photoIcon
+            name.text = settingRow?.nameOfSetting
+            descriptionText.text = settingRow?.descriptionText
+        }
+    }
+
     // MARK: - Outlets -
 
     private lazy var photoImage: UIImageView = {
-        let photoImage = UIImageView()
-        photoImage.clipsToBounds = true
-        photoImage.image = UIImage(named: "photoImage")
-        photoImage.contentMode = .scaleAspectFill
-        photoImage.layer.cornerRadius = 30
-        return photoImage
+        let image = UIImageView()
+        image.clipsToBounds = true
+        image.contentMode = .scaleAspectFill
+        image.layer.cornerRadius = 30
+        return image
     }()
 
     private lazy var name: UILabel = {
-        let name = UILabel()
-        name.text = "Makeev Sergey"
-        name.font = UIFont.systemFont(ofSize: 20, weight: .regular)
-        return name
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        return label
     }()
 
     private lazy var descriptionText: UILabel = {
         let descriptionText = UILabel()
-        descriptionText.text = "Apple ID, iCloud, контент и покупки"
         descriptionText.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         return descriptionText
     }()
@@ -77,6 +84,5 @@ class CustomCellUser: UITableViewCell {
             make.left.equalTo(photoImage.snp.right).offset(20)
         }
     }
-
 }
 

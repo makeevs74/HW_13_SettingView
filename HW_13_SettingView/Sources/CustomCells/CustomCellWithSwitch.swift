@@ -1,22 +1,20 @@
 //
-//  CustomCellSettings.swift
+//  CustomCellWithSwitch.swift
 //  HW_13_SettingView
 //
-//  Created by Sergey Makeev on 01.09.2022.
+//  Created by Sergey Makeev on 07.09.2022.
 //
 
 import UIKit
-import SnapKit
 
-class CustomCellSettings: UITableViewCell {
+class CustomCellWithSwitch: UITableViewCell {
 
-    static let identifier = "cellOfSettings"
+    static let identifier = "cellWithSwitch"
 
     var settingRow: SettingRow? {
         didSet {
             photoIcon.image = settingRow?.photoIcon
             nameOfSetting.text = settingRow?.nameOfSetting
-            descriptionText.text = settingRow?.descriptionText
         }
     }
 
@@ -36,10 +34,10 @@ class CustomCellSettings: UITableViewCell {
         return label
     }()
 
-    private lazy var descriptionText: UILabel = {
-        let descriptionText = UILabel()
-        descriptionText.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        return descriptionText
+    private lazy var switchButton: UISwitch = {
+        let switchButton = UISwitch()
+        switchButton.addTarget(self, action: #selector(switchChanged), for: .touchUpInside)
+        return switchButton
     }()
 
     // MARK: - Initialisers -
@@ -59,7 +57,7 @@ class CustomCellSettings: UITableViewCell {
     private func setupHierarchy() {
         addSubview(photoIcon)
         addSubview(nameOfSetting)
-        addSubview(descriptionText)
+        addSubview(switchButton)
     }
 
     private func setupLayout() {
@@ -74,7 +72,7 @@ class CustomCellSettings: UITableViewCell {
             make.left.equalTo(photoIcon.snp.right).offset(10)
         }
 
-        descriptionText.snp.makeConstraints { make in
+        switchButton.snp.makeConstraints { make in
             make.centerY.equalTo(contentView)
             make.left.equalTo(contentView).offset(-10)
         }
@@ -86,6 +84,16 @@ class CustomCellSettings: UITableViewCell {
         super.prepareForReuse()
         self.accessoryType = .none
         self.settingRow = nil
+    }
+
+    // MARK: - Action -
+
+    @objc func switchChanged(switchButton: UISwitch) {
+        if switchButton.isOn {
+            print("Switch Включен")
+        } else {
+            print("Switch Выключен")
+        }
     }
 }
 
