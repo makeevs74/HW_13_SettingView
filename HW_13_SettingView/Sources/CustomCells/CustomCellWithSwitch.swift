@@ -15,6 +15,7 @@ class CustomCellWithSwitch: UITableViewCell {
         didSet {
             photoIcon.image = settingRow?.photoIcon
             nameOfSetting.text = settingRow?.nameOfSetting
+            iconBackgroundColor.backgroundColor = settingRow?.iconBackgroundColor
         }
     }
 
@@ -24,8 +25,14 @@ class CustomCellWithSwitch: UITableViewCell {
         let image = UIImageView()
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFit
-        image.layer.cornerRadius = 10
+        image.tintColor = .white
         return image
+    }()
+
+    private lazy var iconBackgroundColor: UIImageView = {
+        let color = UIImageView()
+        color.layer.cornerRadius = 7
+        return color
     }()
 
     private lazy var nameOfSetting: UILabel = {
@@ -55,26 +62,32 @@ class CustomCellWithSwitch: UITableViewCell {
     // MARK: - Setup -
 
     private func setupHierarchy() {
-        addSubview(photoIcon)
-        addSubview(nameOfSetting)
-        addSubview(switchButton)
+        contentView.addSubview(iconBackgroundColor)
+        iconBackgroundColor.addSubview(photoIcon)
+        contentView.addSubview(nameOfSetting)
+        contentView.addSubview(switchButton)
     }
 
     private func setupLayout() {
         photoIcon.snp.makeConstraints { make in
-            make.top.left.bottom.equalTo(contentView).offset(10)
-            make.centerY.equalTo(contentView)
+            make.center.equalTo(iconBackgroundColor)
             make.height.width.equalTo(20)
+        }
+
+        iconBackgroundColor.snp.makeConstraints { make in
+            make.left.equalTo(contentView).offset(10)
+            make.centerY.equalTo(contentView)
+            make.height.width.equalTo(30)
         }
 
         nameOfSetting.snp.makeConstraints { make in
             make.centerY.equalTo(photoIcon)
-            make.left.equalTo(photoIcon.snp.right).offset(10)
+            make.left.equalTo(iconBackgroundColor.snp.right).offset(15)
         }
 
         switchButton.snp.makeConstraints { make in
             make.centerY.equalTo(contentView)
-            make.left.equalTo(contentView).offset(-10)
+            make.right.equalTo(contentView).offset(-20)
         }
     }
 

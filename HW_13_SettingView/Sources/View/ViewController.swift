@@ -65,7 +65,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 0 && indexPath.row == 0 {
             return 80
         } else {
-            return 40
+            return 50
         }
     }
 

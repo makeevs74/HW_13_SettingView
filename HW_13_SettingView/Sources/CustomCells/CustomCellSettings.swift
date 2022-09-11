@@ -17,6 +17,7 @@ class CustomCellSettings: UITableViewCell {
             photoIcon.image = settingRow?.photoIcon
             nameOfSetting.text = settingRow?.nameOfSetting
             descriptionText.text = settingRow?.descriptionText
+            iconBackgroundColor.backgroundColor = settingRow?.iconBackgroundColor
         }
     }
 
@@ -26,8 +27,14 @@ class CustomCellSettings: UITableViewCell {
         let image = UIImageView()
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFit
-        image.layer.cornerRadius = 10
+        image.tintColor = .white
         return image
+    }()
+
+    private lazy var iconBackgroundColor: UIImageView = {
+        let color = UIImageView()
+        color.layer.cornerRadius = 7
+        return color
     }()
 
     private lazy var nameOfSetting: UILabel = {
@@ -38,7 +45,8 @@ class CustomCellSettings: UITableViewCell {
 
     private lazy var descriptionText: UILabel = {
         let descriptionText = UILabel()
-        descriptionText.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        descriptionText.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        descriptionText.textColor = .systemGray
         return descriptionText
     }()
 
@@ -57,26 +65,32 @@ class CustomCellSettings: UITableViewCell {
     // MARK: - Setup -
 
     private func setupHierarchy() {
-        addSubview(photoIcon)
-        addSubview(nameOfSetting)
-        addSubview(descriptionText)
+        contentView.addSubview(nameOfSetting)
+        contentView.addSubview(descriptionText)
+        contentView.addSubview(iconBackgroundColor)
+        iconBackgroundColor.addSubview(photoIcon)
     }
 
     private func setupLayout() {
         photoIcon.snp.makeConstraints { make in
-            make.top.left.bottom.equalTo(contentView).offset(10)
-            make.centerY.equalTo(contentView)
+            make.center.equalTo(iconBackgroundColor)
             make.height.width.equalTo(20)
+        }
+
+        iconBackgroundColor.snp.makeConstraints { make in
+            make.left.equalTo(contentView).offset(10)
+            make.centerY.equalTo(contentView)
+            make.height.width.equalTo(30)
         }
 
         nameOfSetting.snp.makeConstraints { make in
             make.centerY.equalTo(photoIcon)
-            make.left.equalTo(photoIcon.snp.right).offset(10)
+            make.left.equalTo(iconBackgroundColor.snp.right).offset(15)
         }
 
         descriptionText.snp.makeConstraints { make in
             make.centerY.equalTo(contentView)
-            make.left.equalTo(contentView).offset(-10)
+            make.right.equalTo(contentView).offset(-15)
         }
     }
 
