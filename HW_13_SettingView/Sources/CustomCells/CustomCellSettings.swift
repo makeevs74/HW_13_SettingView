@@ -74,7 +74,7 @@ class CustomCellSettings: UITableViewCell {
     private func setupLayout() {
         photoIcon.snp.makeConstraints { make in
             make.center.equalTo(iconBackgroundColor)
-            make.height.width.equalTo(20)
+            make.height.width.equalTo(22)
         }
 
         iconBackgroundColor.snp.makeConstraints { make in
