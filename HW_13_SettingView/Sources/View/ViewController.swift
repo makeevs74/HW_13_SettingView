@@ -101,9 +101,20 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
         let cell = settingRows?[indexPath.section][indexPath.row]
         print("Вы нажали \(cell?.nameOfSetting ?? "")")
+
+        switch cell?.typeOfCell {
+        case .settingCellWithSwitch:
+            tableView.deselectRow(at: indexPath, animated: true)
+        case .userCell, .settingCell:
+            let detailViewController = DetailViewController()
+            tableView.deselectRow(at: indexPath, animated: true)
+            detailViewController.settingRow = settingRows?[indexPath.section][indexPath.row]
+            navigationController?.pushViewController(detailViewController, animated: true)
+        case .none:
+            return
+        }
     }
 }
 
