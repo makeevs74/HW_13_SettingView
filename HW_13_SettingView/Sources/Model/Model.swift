@@ -26,7 +26,8 @@ extension SettingRow {
         [SettingRow(typeOfCell: .userCell,
                     photoIcon: UIImage(named: "photoImage"),
                     nameOfSetting: "Makeev Sergey",
-                    descriptionText: "Apple ID, iCloud, контент и покупки")],
+                    descriptionText: "Apple ID, iCloud, контент и покупки",
+                    iconBackgroundColor: .white)],
 
         [SettingRow(typeOfCell: .settingCellWithSwitch,
                     photoIcon: UIImage(systemName: "airplane"),

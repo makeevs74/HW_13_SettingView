@@ -22,9 +22,9 @@ class DetailViewController: UIViewController {
 
     private lazy var photoImage: UIImageView = {
         let image = UIImageView()
-        //image.clipsToBounds = true
-        image.contentMode = .scaleAspectFill
-        image.layer.cornerRadius = 30
+        image.clipsToBounds = true
+        image.contentMode = .scaleAspectFit
+        image.layer.cornerRadius = 50
         image.tintColor = .white
         return image
     }()
@@ -32,12 +32,13 @@ class DetailViewController: UIViewController {
     private lazy var iconBackgroundColor: UIImageView = {
         let color = UIImageView()
         color.layer.cornerRadius = 50
+        color.clipsToBounds = true
         return color
     }()
 
     private lazy var name: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 25, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         return label
     }()
 
@@ -49,6 +50,7 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         setupHierarchy()
         setupLayout()
     }
@@ -57,7 +59,7 @@ class DetailViewController: UIViewController {
 
     private func setupHierarchy() {
         view.addSubview(iconBackgroundColor)
-        view.addSubview(photoImage)
+        iconBackgroundColor.addSubview(photoImage)
         view.addSubview(name)
         view.addSubview(descriptionText)
     }
