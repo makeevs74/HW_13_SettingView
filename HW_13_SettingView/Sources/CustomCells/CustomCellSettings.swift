@@ -12,14 +12,14 @@ class CustomCellSettings: UITableViewCell {
 
     static let identifier = "cellOfSettings"
 
-    var settingRow: SettingRow? {
-        didSet {
-            photoIcon.image = settingRow?.photoIcon
-            nameOfSetting.text = settingRow?.nameOfSetting
-            descriptionText.text = settingRow?.descriptionText
-            iconBackgroundColor.backgroundColor = settingRow?.iconBackgroundColor
-        }
-    }
+//    var settingRow: SettingRow? {
+//        didSet {
+//            photoIcon.image = settingRow?.photoIcon
+//            nameOfSetting.text = settingRow?.nameOfSetting
+//            descriptionText.text = settingRow?.descriptionText
+//            iconBackgroundColor.backgroundColor = settingRow?.iconBackgroundColor
+//        }
+//    }
 
     // MARK: - Outlets -
 
@@ -96,10 +96,22 @@ class CustomCellSettings: UITableViewCell {
 
     // MARK: - Reuse -
 
+    func configureCell(image: String?, title: String?, description: String?, backgroundcolor: String?) {
+        switch image {
+        case "bluetooth", "vpn", "wallet", "siri":
+            photoIcon.image = UIImage(named: image ?? "")
+        default:
+            photoIcon.image = UIImage(systemName: image ?? "")
+        }
+        nameOfSetting.text = title ?? ""
+        descriptionText.text = description ?? ""
+        iconBackgroundColor.backgroundColor = UIColor(named: backgroundcolor ?? "" )
+    }
+
     override func prepareForReuse() {
         super.prepareForReuse()
         self.accessoryType = .none
-        self.settingRow = nil
+//        self.settingRow = nil
     }
 }
 

@@ -1,64 +1,45 @@
 //
-//  ViewController.swift
+//  SettingController.swift
 //  HW_13_SettingView
 //
-//  Created by Sergey Makeev on 31.08.2022.
+//  Created by Sergey Makeev on 11.10.2022.
 //
 
 import UIKit
-import SnapKit
 
-class ViewController: UIViewController {
+class SettingController: UIViewController {
 
-    private var settingRows: [[SettingRow]]?
+    var model: [[SettingRow]]?
 
-    // MARK: - Outlets -
+    private var settingView: SettingView? {
+        guard isViewLoaded else { return nil }
+        return view as? SettingView
+    }
 
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.register(CustomCellUser.self, forCellReuseIdentifier: CustomCellUser.identifier)
-        tableView.register(CustomCellSettings.self, forCellReuseIdentifier: CustomCellSettings.identifier)
-        tableView.register(CustomCellWithSwitch.self, forCellReuseIdentifier: CustomCellWithSwitch.identifier)
-        tableView.dataSource = self
-        tableView.delegate = self
-        return tableView
-    }()
-
-
-
-    // MARK: - Lifecycle -
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray6
+
+        view = SettingView()
+        model = SettingModel.createModels()
+
+        settingView?.tableView.delegate = self
+        settingView?.tableView.dataSource = self
+
         title = "Настройки"
-        settingRows = SettingRow.settingRows
         navigationController?.navigationBar.prefersLargeTitles = true
-        setupHierarchy()
-        setupLayout()
 
         let searchBar = UISearchController(searchResultsController: nil)
         searchBar.searchResultsUpdater = self
         self.navigationItem.searchController = searchBar
     }
-
-    // MARK: - Setup -
-
-    private func setupHierarchy() {
-        view.addSubview(tableView)
-    }
-
-    private func setupLayout() {
-        tableView.snp.makeConstraints { make in
-            make.top.right.bottom.left.equalTo(view)
-        }
-    }
 }
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
+extension SettingController: UITableViewDataSource, UITableViewDelegate {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return settingRows?.count ?? 0
+        return model?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -70,28 +51,34 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return settingRows?[section].count ?? 0
+            return model?[section].count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let customCells = settingRows?[indexPath.section][indexPath.row]
+        let customCells = model?[indexPath.section][indexPath.row]
 
         switch customCells?.typeOfCell {
         case .userCell:
             let cell = tableView.dequeueReusableCell(withIdentifier: CustomCellUser.identifier) as? CustomCellUser
-            cell?.settingRow = settingRows?[indexPath.section][indexPath.row]
+            cell?.configureCell(image: customCells?.photoIcon,
+                                title: customCells?.nameOfSetting,
+                                description: customCells?.descriptionText)
             cell?.accessoryType = .disclosureIndicator
             return cell ?? UITableViewCell()
 
         case .settingCell:
             let cell = tableView.dequeueReusableCell(withIdentifier: CustomCellSettings.identifier) as? CustomCellSettings
-            cell?.settingRow = settingRows?[indexPath.section][indexPath.row]
+            cell?.configureCell(image: customCells?.photoIcon,
+                                title: customCells?.nameOfSetting,
+                                description: customCells?.descriptionText,
+                                backgroundcolor: customCells?.iconBackgroundColor)
             cell?.accessoryType = .disclosureIndicator
             return cell ?? UITableViewCell()
-            
+
         case .settingCellWithSwitch:
             let cell = tableView.dequeueReusableCell(withIdentifier: CustomCellWithSwitch.identifier) as? CustomCellWithSwitch
-            cell?.settingRow = settingRows?[indexPath.section][indexPath.row]
+            cell?.configureCell(image: customCells?.photoIcon,
+                                title: customCells?.nameOfSetting)
             cell?.accessoryType = .none
             return cell ?? UITableViewCell()
 
@@ -101,27 +88,26 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = settingRows?[indexPath.section][indexPath.row]
+        let cell = model?[indexPath.section][indexPath.row]
         print("Вы нажали \(cell?.nameOfSetting ?? "")")
 
         switch cell?.typeOfCell {
         case .settingCellWithSwitch:
             tableView.deselectRow(at: indexPath, animated: true)
         case .userCell, .settingCell:
-            let detailViewController = DetailViewController()
             tableView.deselectRow(at: indexPath, animated: true)
-            detailViewController.settingRow = settingRows?[indexPath.section][indexPath.row]
-            navigationController?.pushViewController(detailViewController, animated: true)
+            let detailController = DetailController()
+            tableView.deselectRow(at: indexPath, animated: true)
+            detailController.model = model?[indexPath.section][indexPath.row]
+            navigationController?.pushViewController(detailController, animated: true)
         case .none:
             return
         }
     }
 }
 
-extension ViewController: UISearchResultsUpdating {
+extension SettingController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         print(searchController.searchBar.text ?? "")
     }
 }
-
-

@@ -7,30 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36576ADE28F5B5B500CFF5D2 /* SettingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36576ADD28F5B5B500CFF5D2 /* SettingRow.swift */; };
+		36576AE128F5BD5800CFF5D2 /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36576AE028F5BD5800CFF5D2 /* SettingController.swift */; };
+		36576B0A28FBF41800CFF5D2 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36576B0928FBF41800CFF5D2 /* DetailView.swift */; };
 		36AC80E328BFD546009C4E0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AC80E228BFD546009C4E0B /* AppDelegate.swift */; };
 		36AC80E528BFD546009C4E0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AC80E428BFD546009C4E0B /* SceneDelegate.swift */; };
-		36AC80E728BFD546009C4E0B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AC80E628BFD546009C4E0B /* ViewController.swift */; };
+		36AC80E728BFD546009C4E0B /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AC80E628BFD546009C4E0B /* SettingView.swift */; };
 		36AC80EC28BFD549009C4E0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36AC80EB28BFD549009C4E0B /* Assets.xcassets */; };
 		36AC80FD28BFE7F4009C4E0B /* CustomCellUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AC80FC28BFE7F4009C4E0B /* CustomCellUser.swift */; };
 		36AC810028BFE84B009C4E0B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 36AC80FF28BFE84B009C4E0B /* SnapKit */; };
 		36AC810228BFF0B9009C4E0B /* CustomCellSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AC810128BFF0B9009C4E0B /* CustomCellSettings.swift */; };
-		36AC810528BFF2D7009C4E0B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AC810428BFF2D7009C4E0B /* Model.swift */; };
+		36AC810528BFF2D7009C4E0B /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AC810428BFF2D7009C4E0B /* SettingModel.swift */; };
 		36B1483928C8D808003BDC45 /* CustomCellWithSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B1483828C8D808003BDC45 /* CustomCellWithSwitch.swift */; };
-		36B1486A28CE5D71003BDC45 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B1486928CE5D71003BDC45 /* DetailViewController.swift */; };
+		36B1486A28CE5D71003BDC45 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B1486928CE5D71003BDC45 /* DetailController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		36576ADD28F5B5B500CFF5D2 /* SettingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRow.swift; sourceTree = "<group>"; };
+		36576AE028F5BD5800CFF5D2 /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
+		36576B0928FBF41800CFF5D2 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		36AC80DF28BFD546009C4E0B /* HW_13_SettingView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HW_13_SettingView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36AC80E228BFD546009C4E0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36AC80E428BFD546009C4E0B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		36AC80E628BFD546009C4E0B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		36AC80E628BFD546009C4E0B /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		36AC80EB28BFD549009C4E0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36AC80F028BFD549009C4E0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36AC80FC28BFE7F4009C4E0B /* CustomCellUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellUser.swift; sourceTree = "<group>"; };
 		36AC810128BFF0B9009C4E0B /* CustomCellSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellSettings.swift; sourceTree = "<group>"; };
-		36AC810428BFF2D7009C4E0B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		36AC810428BFF2D7009C4E0B /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		36B1483828C8D808003BDC45 /* CustomCellWithSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellWithSwitch.swift; sourceTree = "<group>"; };
-		36B1486928CE5D71003BDC45 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		36B1486928CE5D71003BDC45 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +51,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36576ADF28F5BD1C00CFF5D2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				36576AE028F5BD5800CFF5D2 /* SettingController.swift */,
+				36B1486928CE5D71003BDC45 /* DetailController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		36AC80D628BFD546009C4E0B = {
 			isa = PBXGroup;
 			children = (
@@ -83,9 +98,10 @@
 			isa = PBXGroup;
 			children = (
 				36AC810328BFF1B4009C4E0B /* Model */,
+				36AC80FA28BFE01A009C4E0B /* View */,
+				36576ADF28F5BD1C00CFF5D2 /* Controller */,
 				36AC80FB28BFE779009C4E0B /* CustomCells */,
 				36AC80F628BFDEF3009C4E0B /* App */,
-				36AC80FA28BFE01A009C4E0B /* View */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -110,8 +126,8 @@
 		36AC80FA28BFE01A009C4E0B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				36AC80E628BFD546009C4E0B /* ViewController.swift */,
-				36B1486928CE5D71003BDC45 /* DetailViewController.swift */,
+				36AC80E628BFD546009C4E0B /* SettingView.swift */,
+				36576B0928FBF41800CFF5D2 /* DetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -129,7 +145,8 @@
 		36AC810328BFF1B4009C4E0B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				36AC810428BFF2D7009C4E0B /* Model.swift */,
+				36AC810428BFF2D7009C4E0B /* SettingModel.swift */,
+				36576ADD28F5B5B500CFF5D2 /* SettingRow.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -209,14 +226,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36AC80E728BFD546009C4E0B /* ViewController.swift in Sources */,
+				36AC80E728BFD546009C4E0B /* SettingView.swift in Sources */,
 				36AC80FD28BFE7F4009C4E0B /* CustomCellUser.swift in Sources */,
 				36AC80E328BFD546009C4E0B /* AppDelegate.swift in Sources */,
+				36576AE128F5BD5800CFF5D2 /* SettingController.swift in Sources */,
 				36B1483928C8D808003BDC45 /* CustomCellWithSwitch.swift in Sources */,
-				36AC810528BFF2D7009C4E0B /* Model.swift in Sources */,
+				36576B0A28FBF41800CFF5D2 /* DetailView.swift in Sources */,
+				36AC810528BFF2D7009C4E0B /* SettingModel.swift in Sources */,
 				36AC810228BFF0B9009C4E0B /* CustomCellSettings.swift in Sources */,
 				36AC80E528BFD546009C4E0B /* SceneDelegate.swift in Sources */,
-				36B1486A28CE5D71003BDC45 /* DetailViewController.swift in Sources */,
+				36B1486A28CE5D71003BDC45 /* DetailController.swift in Sources */,
+				36576ADE28F5B5B500CFF5D2 /* SettingRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
