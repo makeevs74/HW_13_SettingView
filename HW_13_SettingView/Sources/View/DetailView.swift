@@ -1,22 +1,13 @@
 //
-//  DetailViewController.swift
+//  DetailView.swift
 //  HW_13_SettingView
 //
-//  Created by Sergey Makeev on 11.09.2022.
+//  Created by Sergey Makeev on 16.10.2022.
 //
 
 import UIKit
 
-class DetailViewController: UIViewController {
-
-    var settingRow: SettingRow? {
-        didSet {
-            photoImage.image = settingRow?.photoIcon
-            name.text = settingRow?.nameOfSetting
-            descriptionText.text = settingRow?.descriptionText
-            iconBackgroundColor.backgroundColor = settingRow?.iconBackgroundColor
-        }
-    }
+class DetailView: UIView {
 
     // MARK: - Outlets -
 
@@ -48,9 +39,21 @@ class DetailViewController: UIViewController {
         return descriptionText
     }()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
+    // MARK: - Initializers -
+
+    init() {
+        super.init(frame: .zero)
+        commonInit()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+
+    private func commonInit() {
+        backgroundColor = .white
+
         setupHierarchy()
         setupLayout()
     }
@@ -58,38 +61,40 @@ class DetailViewController: UIViewController {
     // MARK: - Setup -
 
     private func setupHierarchy() {
-        view.addSubview(iconBackgroundColor)
+        addSubview(iconBackgroundColor)
         iconBackgroundColor.addSubview(photoImage)
-        view.addSubview(name)
-        view.addSubview(descriptionText)
+        addSubview(name)
+        addSubview(descriptionText)
     }
 
     private func setupLayout() {
         photoImage.snp.makeConstraints { make in
-            make.center.equalTo(view)
+            make.center.equalTo(snp.center)
             make.height.width.equalTo(140)
         }
 
         iconBackgroundColor.snp.makeConstraints { make in
-            make.center.equalTo(view)
+            make.center.equalTo(snp.center)
             make.height.width.equalTo(200)
         }
 
         name.snp.makeConstraints { make in
-            make.centerX.equalTo(view)
+            make.center.equalTo(snp.center)
             make.top.equalTo(iconBackgroundColor.snp.bottom).offset(20)
         }
 
         descriptionText.snp.makeConstraints { make in
-            make.centerX.equalTo(view)
+            make.center.equalTo(snp.center)
             make.height.equalTo(20)
             make.top.equalTo(name.snp.bottom).offset(10)
         }
     }
-    
-//    private func fillSetting() {
-//        photoImage.image = settingRow?.photoIcon
-//        name.text = settingRow?.nameOfSetting
-//        descriptionText.text = settingRow?.descriptionText
-//    }
+
+    func configureSetting(settingCell: SettingRow?) {
+        photoImage.image = UIImage(named: settingCell?.photoIcon ?? "") 
+        name.text = settingCell?.nameOfSetting
+        descriptionText.text = settingCell?.descriptionText
+        iconBackgroundColor.backgroundColor = UIColor(named: settingCell?.iconBackgroundColor ?? "") 
+    }
+
 }

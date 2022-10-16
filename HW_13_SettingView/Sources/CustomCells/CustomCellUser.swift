@@ -12,14 +12,6 @@ class CustomCellUser: UITableViewCell {
 
     static let identifier = "cellOfUser"
 
-    var settingRow: SettingRow? {
-        didSet {
-            photoImage.image = settingRow?.photoIcon
-            name.text = settingRow?.nameOfSetting
-            descriptionText.text = settingRow?.descriptionText
-        }
-    }
-
     // MARK: - Outlets -
 
     private lazy var photoImage: UIImageView = {
@@ -82,6 +74,22 @@ class CustomCellUser: UITableViewCell {
         stack.snp.makeConstraints { make in
             make.centerY.equalTo(photoImage)
             make.left.equalTo(photoImage.snp.right).offset(20)
+        }
+    }
+
+    // MARK: - Configuration -
+
+    func configureCell(image: String?, title: String?, description: String?) {
+        photoImage.image = UIImage(named: image ?? "")
+        name.text = title ?? ""
+        descriptionText.text = description ?? ""
+    }
+
+    var settingRow: SettingRow? {
+        didSet {
+            photoImage.image = UIImage(named: settingRow?.photoIcon ?? "")
+            name.text = settingRow?.nameOfSetting
+            descriptionText.text = settingRow?.descriptionText
         }
     }
 }
