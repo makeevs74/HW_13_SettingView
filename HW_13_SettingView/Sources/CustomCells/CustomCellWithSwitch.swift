@@ -93,16 +93,15 @@ class CustomCellWithSwitch: UITableViewCell {
 
     // MARK: - Reuse -
 
-    func configureCell(image: String?, title: String?) {
+    func configureCell(image: String?, title: String?, backgroundcolor: UIColor?) {
         photoIcon.image = UIImage(systemName: image ?? "")
         nameOfSetting.text = title ?? ""
-//        descriptionText.text = description ?? ""
+        iconBackgroundColor.backgroundColor = backgroundcolor
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
         self.accessoryType = .none
-//        self.settingRow = nil
     }
 
     // MARK: - Action -

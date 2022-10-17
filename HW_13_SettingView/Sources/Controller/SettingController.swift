@@ -42,16 +42,16 @@ extension SettingController: UITableViewDataSource, UITableViewDelegate {
         return model?.count ?? 0
     }
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return model?[section].count ?? 0
+    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 && indexPath.row == 0 {
             return 80
         } else {
             return 50
         }
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return model?[section].count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,7 +78,8 @@ extension SettingController: UITableViewDataSource, UITableViewDelegate {
         case .settingCellWithSwitch:
             let cell = tableView.dequeueReusableCell(withIdentifier: CustomCellWithSwitch.identifier) as? CustomCellWithSwitch
             cell?.configureCell(image: customCells?.photoIcon,
-                                title: customCells?.nameOfSetting)
+                                title: customCells?.nameOfSetting,
+                                backgroundcolor: customCells?.iconBackgroundColor)
             cell?.accessoryType = .none
             return cell ?? UITableViewCell()
 

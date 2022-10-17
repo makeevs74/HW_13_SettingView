@@ -51,12 +51,6 @@ class SettingView: UIView {
     }
 }
 
-    // MARK: - Configuration
-
-    //    func configureView(with models: [[SettingRow]]) {
-    //        self.models = models
-
-    //
 
 
 

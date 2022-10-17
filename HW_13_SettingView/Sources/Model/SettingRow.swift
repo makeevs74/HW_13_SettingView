@@ -5,7 +5,7 @@
 //  Created by Sergey Makeev on 11.10.2022.
 //
 
-import Foundation
+import UIKit
 
 enum typeOfCell {
     case userCell
@@ -18,5 +18,5 @@ struct SettingRow {
     var photoIcon: String?
     var nameOfSetting: String
     var descriptionText: String?
-    var iconBackgroundColor: String?
+    var iconBackgroundColor: UIColor?
 }

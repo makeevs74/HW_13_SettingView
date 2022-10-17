@@ -96,16 +96,16 @@ class CustomCellSettings: UITableViewCell {
 
     // MARK: - Reuse -
 
-    func configureCell(image: String?, title: String?, description: String?, backgroundcolor: String?) {
+    func configureCell(image: String?, title: String?, description: String?, backgroundcolor: UIColor?) {
         switch image {
-        case "bluetooth", "vpn", "wallet", "siri":
+        case "bluetooth", "vpn", "wallet", "siri", "app store", "sos":
             photoIcon.image = UIImage(named: image ?? "")
         default:
             photoIcon.image = UIImage(systemName: image ?? "")
         }
         nameOfSetting.text = title ?? ""
         descriptionText.text = description ?? ""
-        iconBackgroundColor.backgroundColor = UIColor(named: backgroundcolor ?? "" )
+        iconBackgroundColor.backgroundColor = backgroundcolor
     }
 
     override func prepareForReuse() {

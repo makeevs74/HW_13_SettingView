@@ -29,6 +29,7 @@ class DetailView: UIView {
 
     private lazy var name: UILabel = {
         let label = UILabel()
+        label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         return label
     }()
@@ -62,31 +63,31 @@ class DetailView: UIView {
 
     private func setupHierarchy() {
         addSubview(iconBackgroundColor)
-        iconBackgroundColor.addSubview(photoImage)
         addSubview(name)
         addSubview(descriptionText)
+        iconBackgroundColor.addSubview(photoImage)
     }
 
     private func setupLayout() {
         photoImage.snp.makeConstraints { make in
-            make.center.equalTo(snp.center)
+            make.center.equalTo(iconBackgroundColor)
             make.height.width.equalTo(140)
         }
 
         iconBackgroundColor.snp.makeConstraints { make in
             make.center.equalTo(snp.center)
-            make.height.width.equalTo(200)
+            make.height.width.equalTo(280)
         }
 
         name.snp.makeConstraints { make in
             make.center.equalTo(snp.center)
-            make.top.equalTo(iconBackgroundColor.snp.bottom).offset(20)
+            make.bottom.equalTo(iconBackgroundColor.snp.top).inset(20)
         }
 
         descriptionText.snp.makeConstraints { make in
-            make.center.equalTo(snp.center)
+            make.centerX.equalTo(snp.centerX)
             make.height.equalTo(20)
-            make.top.equalTo(name.snp.bottom).offset(10)
+            make.top.equalTo(name.snp.bottom).offset(60)
         }
     }
 
@@ -94,7 +95,6 @@ class DetailView: UIView {
         photoImage.image = UIImage(named: settingCell?.photoIcon ?? "") 
         name.text = settingCell?.nameOfSetting
         descriptionText.text = settingCell?.descriptionText
-        iconBackgroundColor.backgroundColor = UIColor(named: settingCell?.iconBackgroundColor ?? "") 
+        iconBackgroundColor.backgroundColor = settingCell?.iconBackgroundColor
     }
-
 }
