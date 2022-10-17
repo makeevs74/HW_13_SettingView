@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class DetailView: UIView {
 
@@ -15,14 +16,13 @@ class DetailView: UIView {
         let image = UIImageView()
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFit
-        image.layer.cornerRadius = 50
         image.tintColor = .white
         return image
     }()
 
     private lazy var iconBackgroundColor: UIImageView = {
         let color = UIImageView()
-        color.layer.cornerRadius = 50
+        color.layer.cornerRadius = 40
         color.clipsToBounds = true
         return color
     }()
@@ -36,7 +36,7 @@ class DetailView: UIView {
 
     private lazy var descriptionText: UILabel = {
         let descriptionText = UILabel()
-        descriptionText.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        descriptionText.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         return descriptionText
     }()
 
@@ -71,28 +71,33 @@ class DetailView: UIView {
     private func setupLayout() {
         photoImage.snp.makeConstraints { make in
             make.center.equalTo(iconBackgroundColor)
-            make.height.width.equalTo(140)
+            make.height.width.equalTo(100)
         }
 
         iconBackgroundColor.snp.makeConstraints { make in
             make.center.equalTo(snp.center)
-            make.height.width.equalTo(280)
+            make.height.width.equalTo(140)
         }
 
         name.snp.makeConstraints { make in
-            make.center.equalTo(snp.center)
-            make.bottom.equalTo(iconBackgroundColor.snp.top).inset(20)
+            make.centerX.equalTo(snp.centerX)
+            make.bottom.equalTo(iconBackgroundColor.snp.top).offset(-25)
         }
 
         descriptionText.snp.makeConstraints { make in
             make.centerX.equalTo(snp.centerX)
             make.height.equalTo(20)
-            make.top.equalTo(name.snp.bottom).offset(60)
+            make.top.equalTo(iconBackgroundColor.snp.bottom).offset(20)
         }
     }
 
     func configureSetting(settingCell: SettingRow?) {
-        photoImage.image = UIImage(named: settingCell?.photoIcon ?? "") 
+        switch settingCell?.photoIcon {
+        case "bluetooth", "vpn", "wallet", "siri", "app store", "sos", "photoImage":
+            photoImage.image = UIImage(named: settingCell?.photoIcon ?? "")
+        default:
+            photoImage.image = UIImage(systemName: settingCell?.photoIcon ?? "")
+        }
         name.text = settingCell?.nameOfSetting
         descriptionText.text = settingCell?.descriptionText
         iconBackgroundColor.backgroundColor = settingCell?.iconBackgroundColor
