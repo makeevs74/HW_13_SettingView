@@ -11,13 +11,13 @@ class CustomCellWithSwitch: UITableViewCell {
 
     static let identifier = "cellWithSwitch"
 
-    var settingRow: SettingRow? {
-        didSet {
-            photoIcon.image = settingRow?.photoIcon
-            nameOfSetting.text = settingRow?.nameOfSetting
-            iconBackgroundColor.backgroundColor = settingRow?.iconBackgroundColor
-        }
-    }
+//    var settingRow: SettingRow? {
+//        didSet {
+//            photoIcon.image = settingRow?.photoIcon
+//            nameOfSetting.text = settingRow?.nameOfSetting
+//            iconBackgroundColor.backgroundColor = settingRow?.iconBackgroundColor
+//        }
+//    }
 
     // MARK: - Outlets -
 
@@ -93,10 +93,15 @@ class CustomCellWithSwitch: UITableViewCell {
 
     // MARK: - Reuse -
 
+    func configureCell(image: String?, title: String?, backgroundcolor: UIColor?) {
+        photoIcon.image = UIImage(systemName: image ?? "")
+        nameOfSetting.text = title ?? ""
+        iconBackgroundColor.backgroundColor = backgroundcolor
+    }
+
     override func prepareForReuse() {
         super.prepareForReuse()
         self.accessoryType = .none
-        self.settingRow = nil
     }
 
     // MARK: - Action -
